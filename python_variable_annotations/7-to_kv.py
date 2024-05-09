@@ -19,3 +19,4 @@ def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     cncat = (k, v**2)
 
     return cncat
+
