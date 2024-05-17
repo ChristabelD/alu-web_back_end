@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-'''
-Find the correct pages to paginate the dataset correctly
-'''
+"""Task 1: Simple pagination.
+"""
+
 import csv
 import math
-from typing import List, Tuple  # Add the Tuple import here
+from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    '''
-    Return a tuple containing the start and end indexes
-    '''
-    return (page * page_size - page_size, page * page_size)
+    """Retrieves the index range from a given page and page size.
+    """
+
+    return ((page - 1) * page_size, ((page - 1) * page_size) + page_size)
 
 
 class Server:
@@ -34,7 +34,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Find the correct pages to paginate the dataset
+        """Retrieves a page of data.
         """
         assert type(page) == int and type(page_size) == int
         assert page > 0 and page_size > 0
