@@ -1,0 +1,22 @@
+{
+  "server": {
+    "listen": 80,
+    "server_name": "example.com",
+    "location": [
+      {
+        "path": "/",
+        "proxy_pass": "http://localhost:3000",
+        "proxy_set_header": [
+          "Host $host",
+          "X-Real-IP $remote_addr",
+          "X-Forwarded-For $proxy_add_x_forwarded_for",
+          "X-Forwarded-Proto $scheme"
+        ]
+      },
+      {
+        "path": "/static",
+        "root": "/var/www/example.com/static"
+      }
+    ]
+  }
+}
