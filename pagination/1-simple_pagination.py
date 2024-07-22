@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-"""Task 1: Simple pagination.
-"""
+"""Simple pagination"""
 
 import csv
 import math
-from typing import List, Tuple
+from typing import List
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """Retrieves the index range from a given page and page size.
+def index_range(page, page_size):
+    """ return a tuple of size two containing a start index and an
+        end index corresponding to the range
+        of indexes to return in a list for those
+        particular pagination parameters.
     """
-
-    return ((page - 1) * page_size, ((page - 1) * page_size) + page_size)
+    if (page == 1):
+        return (0, page_size)
+    start = (page - 1) * page_size
+    end = start + page_size
+    return (start, end)
 
 
 class Server:
@@ -30,16 +35,14 @@ class Server:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
-
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Retrieves a page of data.
-        """
-        assert type(page) == int and type(page_size) == int
-        assert page > 0 and page_size > 0
-        start, end = index_range(page, page_size)
+        """get the page"""
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
+        page_info = index_range(page=page, page_size=page_size)
         data = self.dataset()
-        if start > len(data):
+        if page_info[1] > len(data):
             return []
-        return data[start:end]
+        return data[page_info[0]:page_info[1]]

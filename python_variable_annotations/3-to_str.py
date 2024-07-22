@@ -1,16 +1,7 @@
 #!/usr/bin/env python3
-"""
-    Conver float to integer
-"""
+"""to_str function"""
 
 
 def to_str(n: float) -> str:
-    """
-        Args:
-            n: float number
-
-        Return:
-            Float of type string
-    """
-
+    """float to string"""
     return str(n)

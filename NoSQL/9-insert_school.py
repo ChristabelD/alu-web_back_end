@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-'''Task 9: Inesrt document in python
-'''
-
+"""insert a document in a collection"""
 
 def insert_school(mongo_collection, **kwargs):
-    '''Inserts a new document in a collection.
-    '''
-    result = mongo_collection.insert_one(kwargs)
-    return result.inserted_id
+    """insert a document in a collection"""
+    return mongo_collection.insert_one(kwargs).inserted_id
+

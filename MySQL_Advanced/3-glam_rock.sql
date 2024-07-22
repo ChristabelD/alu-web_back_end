@@ -1,6 +1,10 @@
--- Lists all bands with Glam rock as their main style, ranked by their longevity.
--- SELECT band_name, (IFNULL(split, YEAR(CURRENT_DATE())) - formed) AS lifespan
-SELECT band_name, (IFNULL(split, '2020') - formed) AS lifespan
-    FROM metal_bands
-    WHERE FIND_IN_SET('Glam rock', IFNULL(style, "")) > 0
-    ORDER BY lifespan DESC;    
+-- Title: Time Together
+SELECT
+    band_name,
+    CASE
+        WHEN split IS NULL THEN 2020 - COALESCE(formed, YEAR(curdate()))
+        ELSE COALESCE(split, YEAR(curdate())) - COALESCE(formed, YEAR(curdate()))
+    END AS lifespan
+FROM metal_bands
+WHERE style LIKE '%Glam rock%'
+ORDER BY lifespan DESC;
